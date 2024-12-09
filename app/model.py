@@ -2,7 +2,7 @@
 import tensorflow as tf
 
 def load_model():
-    return tf.keras.models.load_model('face_model.h5')
+    return tf.keras.models.load_model('models/emotion_model.h5')
 
 def predict_emotion(image_array):
     model = load_model()
