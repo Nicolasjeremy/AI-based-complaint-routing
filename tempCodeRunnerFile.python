@@ -1,0 +1,22 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+df = pd.read_csv('https://drive.google.com/uc?id=1tEONPYKf4Z_iq8kgGjaf288ZIUvzJG9i')
+df.head()
+
+# Write your code here
+#1 The size of the data
+print("Dataset size:")
+print(f"Instances: {df.shape[0]} \nFeatures: {df.shape[1]}")
+print("\nData types of each feature:")
+
+#2 The data types of each feature
+print(df.dtypes)
+
+#seperate Boolean data and seperate data based on categorical and non.
+boolean_data = [col for col in df.columns 
+                if df[col].nunique() == 2 and set(df[col].dropna().unique()) == {0, 1}]
+numerical_features = df.select_dtypes(include=['number']).drop(columns=boolean_data, errors='ignore').columns
+categorical_features = list(df.select_dtypes(include=['object', 'category']).columns) + boolean_data
