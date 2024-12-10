@@ -27,31 +27,30 @@ def index():
 
 @app.route('/predict', methods=['POST'])
 def predict():
-    """
-    Handle emotion detection requests
-    """
     if 'image' not in request.files:
         return jsonify({'error': 'No file uploaded'}), 400
 
-    # Save the uploaded file
+    # Save uploaded file
     file = request.files['image']
     filename = secure_filename(file.filename)
     filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
     file.save(filepath)
 
-    # Read and preprocess the image
+    # Load and process the image
     image = cv2.imread(filepath)
-    image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # Convert to grayscale if necessary
-    image = cv2.resize(image, (48, 48))  # Resize for the model
-    image = image[np.newaxis, :, :, np.newaxis] / 255.0  # Normalize and add batch dimension
+    if image is None:
+        return jsonify({'error': 'Invalid image format'}), 400
 
-    # Predict emotion
+    # Predict Emotion
     emotion = predict_emotion(image)
 
     # Clean up the uploaded file
     os.remove(filepath)
 
     return jsonify({'emotion': emotion})
+
+
+
 
 
 if __name__ == '__main__':

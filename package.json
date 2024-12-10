@@ -1,6 +1,8 @@
 {
   "dependencies": {
     "@tensorflow/tfjs": "^4.22.0",
-    "axios": "^1.7.9"
+    "axios": "^1.7.9",
+    "firebase": "^11.0.2",
+    "flask": "^0.2.10"
   }
 }

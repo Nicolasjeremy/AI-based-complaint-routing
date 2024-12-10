@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emotion Detection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h2>Login</h2>
+    <form id="login-form">
+        <input type="email" id="email" placeholder="Email" required />
+        <input type="password" id="password" placeholder="Password" required />
+        <button type="submit">Login</button>
+    </form>
+    <p id="error-message" style="color: red;"></p>
+    <button id="logout-btn" style="display: none;">Logout</button>
+
+
+    <h1>Emotion Detection</h1>
+
+    <div id="camera-container">
+        <div id="face-guide">
+            <video id="webcam" autoplay></video>
+            <div id="face-box"></div>
+        </div>
+    </div>
+
+    <button id="capture-btn">Capture Emotion</button>
+    <p id="emotion">Emotion will be displayed here...</p>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
