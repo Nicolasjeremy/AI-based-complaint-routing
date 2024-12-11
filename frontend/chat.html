@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="chat.css">
+    <title>Emotion Detection Chat</title>
+</head>
+<body>
+    <div class="chat-container">
+        <h2 style="text-align: center;">Chat Interface</h2>
+        <div id="camera" class="camera-container"></div> <!-- Webcam stream -->
+
+        <div id="emotion" class="emotion-display"></div> <!-- Emotion display -->
+
+        <div class="chat-window" id="chatWindow"></div>
+        <div class="chat-input-container">
+            <input type="text" id="chatInput" placeholder="Type your message" required>
+            <button id="btnpress" type="button">Send</button> <!-- No form submission -->
+        </div>
+    </div>
+
+    <script src="chat.js"></script>
+</body>
+</html>
