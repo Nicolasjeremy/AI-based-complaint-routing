@@ -5,11 +5,10 @@ import os
 from deepface import DeepFace
 os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
 import cv2
-from model import predict_emotion
 
 # Initialize Flask app
 app = Flask(__name__)
-CORS(app)  # Enable CORS for all routes
+CORS(app, origins=["https://nicolasjeremy.github.io"])  # Allow specific frontend origin
 
 # Set the upload folder
 UPLOAD_FOLDER = 'uploads'
@@ -39,12 +38,20 @@ def predict():
 
         # Use DeepFace for face detection and emotion recognition
         analysis = DeepFace.analyze(image, actions=['emotion'], enforce_detection=False)
-        detected_emotion = analysis[0].get('dominant_emotion', 'No face detected')
+        
+        # Extract the dominant emotion
+        if isinstance(analysis, list) and len(analysis) > 0:
+            detected_emotion = analysis[0].get('dominant_emotion', 'No face detected')
+        else:
+            detected_emotion = analysis.get('dominant_emotion', 'No face detected')
+
+        print(f"Detected Emotion: {detected_emotion}")  # Log detected emotion
 
         os.remove(filepath)
         return jsonify({'emotion': detected_emotion})
 
     except Exception as e:
+        print(f"Error during prediction: {str(e)}")  # Log error
         if os.path.exists(filepath):
             os.remove(filepath)
         return jsonify({'error': f"Face detection failed: {str(e)}"}), 500

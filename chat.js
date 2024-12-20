@@ -85,7 +85,7 @@ document.addEventListener("DOMContentLoaded", () => {
     
                 try {
                     console.log("Sending image to server...");
-                    const response = await fetch("https://ai-based-complaint-routing.onrender.com", {
+                    const response = await fetch("https://ai-based-complaint-routing.onrender.com/predict", {
                         method: "POST",
                         body: formData,
                     });
