@@ -21,7 +21,7 @@ const firebaseConfig = {
       firebase.auth.GoogleAuthProvider.PROVIDER_ID,
     ],
     signInFlow: "popup",
-    signInSuccessUrl: "/frontend/chat.html",
+    signInSuccessUrl: "/AI-based-complaint-routing/chat.html",
     callbacks: {
       uiShown: () => {
         document.getElementById("loader").style.display = "none";
@@ -41,7 +41,7 @@ const firebaseConfig = {
     `;
   
     document.getElementById("continue-button").addEventListener("click", () => {
-      window.location.href = "/chat.html"; 
+      window.location.href = "/AI-based-complaint-routing/chat.html"; 
     });
   }
   
