@@ -96,13 +96,20 @@ document.addEventListener("DOMContentLoaded", () => {
                     const data = await response.json();
                     console.log("Received response from server:", data);
                     
-    
                     const emotion = data.emotion;
                     emotionDisplay.innerText = `Detected Emotion: ${emotion}`;
     
+                    // Determine routing based on emotion
+                    let routingMessage;
+                    if (emotion === "neutral" || emotion === "happy") {
+                        routingMessage = "You are feeling " + emotion + ". Your complaint will be handled by our AI assistant.";
+                    } else {
+                        routingMessage = `You are feeling ${emotion}. Your complaint will be routed to a human agent for further assistance.`;
+                    }
+    
                     // Append message to chat
                     const userMessage = chatInput.value.trim() || "You didn't type a message.";
-                    const emotionMessage = `You are feeling ${emotion}.`;
+                    const emotionMessage = routingMessage;
     
                     // User message bubble
                     const userBubble = document.createElement("div");
@@ -130,5 +137,4 @@ document.addEventListener("DOMContentLoaded", () => {
             emotionDisplay.innerText = "Unexpected error occurred!";
         }
     });
-    
 });
